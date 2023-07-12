@@ -1,0 +1,233 @@
+nohup: ignoring input
+Attaching SeuratObject
+Loading required package: SummarizedExperiment
+Loading required package: MatrixGenerics
+Loading required package: matrixStats
+
+Attaching package: 'MatrixGenerics'
+
+The following objects are masked from 'package:matrixStats':
+
+    colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
+    colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
+    colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
+    colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
+    colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
+    colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
+    colWeightedMeans, colWeightedMedians, colWeightedSds,
+    colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
+    rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
+    rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
+    rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
+    rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
+    rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
+    rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
+    rowWeightedSds, rowWeightedVars
+
+Loading required package: GenomicRanges
+Loading required package: stats4
+Loading required package: BiocGenerics
+
+Attaching package: 'BiocGenerics'
+
+The following objects are masked from 'package:stats':
+
+    IQR, mad, sd, var, xtabs
+
+The following objects are masked from 'package:base':
+
+    Filter, Find, Map, Position, Reduce, anyDuplicated, aperm, append,
+    as.data.frame, basename, cbind, colnames, dirname, do.call,
+    duplicated, eval, evalq, get, grep, grepl, intersect, is.unsorted,
+    lapply, mapply, match, mget, order, paste, pmax, pmax.int, pmin,
+    pmin.int, rank, rbind, rownames, sapply, setdiff, sort, table,
+    tapply, union, unique, unsplit, which.max, which.min
+
+Loading required package: S4Vectors
+
+Attaching package: 'S4Vectors'
+
+The following object is masked from 'package:utils':
+
+    findMatches
+
+The following objects are masked from 'package:base':
+
+    I, expand.grid, unname
+
+Loading required package: IRanges
+Loading required package: GenomeInfoDb
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+
+Attaching package: 'Biobase'
+
+The following object is masked from 'package:MatrixGenerics':
+
+    rowMedians
+
+The following objects are masked from 'package:matrixStats':
+
+    anyMissing, rowMedians
+
+
+Attaching package: 'SummarizedExperiment'
+
+The following object is masked from 'package:SeuratObject':
+
+    Assays
+
+The following object is masked from 'package:Seurat':
+
+    Assays
+
+snapshotDate(): 2022-10-31
+see ?celldex and browseVignettes('celldex') for documentation
+loading from cache
+see ?celldex and browseVignettes('celldex') for documentation
+loading from cache
+Warning messages:
+1: 'ImmGenData' is deprecated.
+Use 'celldex::ImmGenData' instead.
+See help("Deprecated") 
+2: replacing previous import 'utils::findMatches' by 'S4Vectors::findMatches' when loading 'AnnotationDbi' 
+[1] "Subsetting for B cells..."
+[1] "RunPCA for B cells..."
+[1] "RunUMAP for B cells..."
+Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric
+To use Python UMAP via reticulate, set umap.method to 'umap-learn' and metric to 'correlation'
+This message will be shown once per session
+[1] "FindNeighbor for B cells..."
+Computing nearest neighbor graph
+Computing SNN
+[1] "FindCluster for B cells..."
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 7260
+Number of edges: 279163
+
+Running Louvain algorithm...
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Maximum modularity in 10 random starts: 0.8615
+Number of communities: 15
+Elapsed time: 4 seconds
+[1] "DimPlot forB cells..."
+[1] "singleR forB cells..."
+[1] "Write singleR table forB cells..."
+[1] "Subsetting for Erythrocytes..."
+[1] "RunPCA for Erythrocytes..."
+[1] "RunUMAP for Erythrocytes..."
+[1] "FindNeighbor for Erythrocytes..."
+Computing nearest neighbor graph
+Computing SNN
+[1] "FindCluster for Erythrocytes..."
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1684
+Number of edges: 65751
+
+Running Louvain algorithm...
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Maximum modularity in 10 random starts: 0.7273
+Number of communities: 7
+Elapsed time: 0 seconds
+[1] "DimPlot forErythrocytes..."
+[1] "singleR forErythrocytes..."
+[1] "Write singleR table forErythrocytes..."
+[1] "Subsetting for Granulocytes..."
+[1] "RunPCA for Granulocytes..."
+[1] "RunUMAP for Granulocytes..."
+[1] "FindNeighbor for Granulocytes..."
+Computing nearest neighbor graph
+Computing SNN
+[1] "FindCluster for Granulocytes..."
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 34606
+Number of edges: 1202169
+
+Running Louvain algorithm...
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Maximum modularity in 10 random starts: 0.9107
+Number of communities: 27
+Elapsed time: 11 seconds
+[1] "DimPlot forGranulocytes..."
+[1] "singleR forGranulocytes..."
+[1] "Write singleR table forGranulocytes..."
+[1] "Subsetting for NK cells..."
+[1] "RunPCA for NK cells..."
+[1] "RunUMAP for NK cells..."
+[1] "FindNeighbor for NK cells..."
+Computing nearest neighbor graph
+Computing SNN
+[1] "FindCluster for NK cells..."
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1098
+Number of edges: 42606
+
+Running Louvain algorithm...
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Maximum modularity in 10 random starts: 0.6109
+Number of communities: 4
+Elapsed time: 0 seconds
+[1] "DimPlot forNK cells..."
+[1] "singleR forNK cells..."
+[1] "Write singleR table forNK cells..."
+[1] "Subsetting for Monocytes..."
+[1] "RunPCA for Monocytes..."
+[1] "RunUMAP for Monocytes..."
+[1] "FindNeighbor for Monocytes..."
+Computing nearest neighbor graph
+Computing SNN
+[1] "FindCluster for Monocytes..."
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 13144
+Number of edges: 469724
+
+Running Louvain algorithm...
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Maximum modularity in 10 random starts: 0.8818
+Number of communities: 21
+Elapsed time: 3 seconds
+[1] "DimPlot forMonocytes..."
+[1] "singleR forMonocytes..."
+[1] "Write singleR table forMonocytes..."
+[1] "Subsetting for T cells..."
+[1] "RunPCA for T cells..."
+[1] "RunUMAP for T cells..."
+[1] "FindNeighbor for T cells..."
+Computing nearest neighbor graph
+Computing SNN
+[1] "FindCluster for T cells..."
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1914
+Number of edges: 75615
+
+Running Louvain algorithm...
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Maximum modularity in 10 random starts: 0.7519
+Number of communities: 8
+Elapsed time: 0 seconds
+[1] "DimPlot forT cells..."
+[1] "singleR forT cells..."
+[1] "Write singleR table forT cells..."
