@@ -12,22 +12,24 @@ R.utils::setOption("clusterProfiler.download.method",'auto')
 cell_types = c("B_cells")
 KEGG_database = 'mmu'
 
-
 goenrichment <- function(cell_type){
   print(paste0("Enriching for ", cell_type, "..."))
   markers <-read.delim(paste0("./Result_for_WT/05.edgeRMarkgenes.Result/", cell_type, ".control_treat.glmLRT.plot.txt"), row.names = 1, sep = '\t', check.names = FALSE)
   print("Drawing up genes...")
   gene_up = markers[which(markers$sig=='up'),]
   gene_up = rownames(gene_up)
-  print("Rownamed process...")
+  gene_count = length(gene_up)
+  print(gene_count)
   gene_up = as.character(na.omit(AnnotationDbi::select(org.Mm.eg.db,
                                                        keys = gene_up,
                                                        columns = 'ENTREZID',
                                                        keytype = 'SYMBOL')[,2]))
-  geneset = gene_up                       
+  geneset = gene_up
+  gene_count = length(geneset)
+  print(geneset)
   
   kegg.histogram.up = as.data.frame(enrichKEGG(gene = geneset,organism= KEGG_database, qvalueCutoff = 1, pvalueCutoff= 1))
-  
+  write.csv(kegg.histogram.up, "/data/yihan/Mxra7_2m/Result_for_WT/06.Enrichment.Result/B_cells.up_gene.KEGG.csv")
   rownames(kegg.histogram.up) = 1:nrow(kegg.histogram.up)
   kegg.histogram.up$order=factor(rev(as.integer(rownames(kegg.histogram.up))),labels = rev(kegg.histogram.up$Description))
   kegg.histogram.up$Description = gsub(' - Mus musculus \\(house mouse\\)','',kegg.histogram.up$Description)
@@ -43,9 +45,8 @@ goenrichment <- function(cell_type){
           legend.title = element_text(face = "bold",size = 8),
           axis.text.y = element_text(size=8)) 
   kegg.plot.up
-  ggsave(paste0("./05.edgeRMarkgenes.Result/Enrich_KEGG/", cell_type, ".down_gene.KEGG.pdf"), plot = kegg.plot.up)
+  ggsave(paste0("./Result_for_WT/06.Enrichment.Result/", cell_type, ".up_gene.KEGG.pdf"), plot = kegg.plot.up)
 }
-
 
 for (cell_type in cell_types){
   goenrichment(cell_type)

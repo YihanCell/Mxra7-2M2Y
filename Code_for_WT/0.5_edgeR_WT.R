@@ -41,9 +41,9 @@ cell_type_estimateDisp <- function(cell_type){
   #log2FC≤-0.4 & FDR<0.01 标识 down，代表显著下调的基因
   #其余标识 none，代表非差异的基因
   print("Find up&down marker genes")
-  gene_diff[which(gene_diff$logFC >= 1 & gene_diff$FDR < 0.01),'sig'] <- 'up'
-  gene_diff[which(gene_diff$logFC <= -1 & gene_diff$FDR < 0.01),'sig'] <- 'down'
-  gene_diff[which(abs(gene_diff$logFC) <= 1 | gene_diff$FDR >= 0.01),'sig'] <- 'none'
+  gene_diff[which(gene_diff$logFC >= log2(1.5) & gene_diff$FDR < 0.05),'sig'] <- 'up'
+  gene_diff[which(gene_diff$logFC <= log2(1.5) & gene_diff$FDR < 0.05),'sig'] <- 'down'
+  gene_diff[which(abs(gene_diff$logFC) <= log2(1.5) | gene_diff$FDR >= 0.05),'sig'] <- 'none'
   write.table(gene_diff, file = paste0("./Result_for_WT/05.edgeRMarkgenes.Result/", gsub(" ", "_", cell_type), ".control_treat.glmLRT.plot.txt"), sep = '\t', col.names = NA, quote = FALSE)
   
   #输出选择的差异基因总表
