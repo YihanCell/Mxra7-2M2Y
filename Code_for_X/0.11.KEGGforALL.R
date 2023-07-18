@@ -15,11 +15,15 @@ KEGG_database = 'mmu'
 goenrichment = function(cell_type){
   print(paste0("Enriching for ", cell_type, "..."))
   markers = read.delim(paste0("./Result_for_X/06/", cell_type, ".control_treat.glmLRT.plot.txt"), row.names = 1, sep = '\t', check.names = FALSE)
-  insection = read.delim(paste0("/data/yihan/Mxra7_2m/Result_for_interstection/more/",cell_type,".down.txt"), header = FALSE, sep = '\t', stringsAsFactors = FALSE)[, 1]
+  
+  intersection_down = read.delim(paste0("/data/yihan/Mxra7_2m/Result_for_interstection/more/",cell_type,".down.txt"), header = FALSE, sep = '\t', stringsAsFactors = FALSE)[, 1]
+  intersection_up = read.delim(paste0("/data/yihan/Mxra7_2m/Result_for_interstection/more/",cell_type,".up.txt"), header = FALSE, sep = '\t', stringsAsFactors = FALSE)[, 1]
+  
   print("Drawing down genes...")
   gene_all = markers[which(markers$sig %in% c('down', 'up')), ]
   gene_all = rownames(gene_all)
-  gene_all = setdiff(gene_all, insection)
+  
+  gene_all = setdiff(gene_all, c(intersection_down, intersection_up))
   
   gene_all = as.character(na.omit(AnnotationDbi::select(org.Mm.eg.db,
                                                          keys = gene_all,
