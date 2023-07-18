@@ -14,7 +14,7 @@ KEGG_database = 'mmu'
 
 goenrichment = function(cell_type){
   print(paste0("Enriching for ", cell_type, "..."))
-  markers = read.delim(paste0("./Result_for_WT/05/", cell_type, ".control_treat.glmLRT.plot.txt"), row.names = 1, sep = '\t', check.names = FALSE)
+  markers = read.delim(paste0("./Result_for_X/06/", cell_type, ".control_treat.glmLRT.plot.txt"), row.names = 1, sep = '\t', check.names = FALSE)
   insection = read.delim(paste0("/data/yihan/Mxra7_2m/Result_for_interstection/more/",cell_type,".up.txt"), header = FALSE, sep = '\t', stringsAsFactors = FALSE)[, 1]
   print("Drawing up genes...")
   gene_up = markers[which(markers$sig=='up'),]
@@ -28,7 +28,7 @@ goenrichment = function(cell_type){
   geneset = gene_up
   
   kegg.histogram.up = as.data.frame(enrichKEGG(gene = geneset,organism= KEGG_database, qvalueCutoff = 1, pvalueCutoff= 1))
-  write.csv(kegg.histogram.up, paste0("/data/yihan/Mxra7_2m/Result_for_WT/07.Enrichment.Result.KEGG/",cell_type,".up_gene.KEGG.csv"))
+  write.csv(kegg.histogram.up, paste0("/data/yihan/Mxra7_2m/Result_for_X/07.Enrichment.Result.KEGG/",cell_type,".up_gene.KEGG.csv"))
   
   rownames(kegg.histogram.up) = 1:nrow(kegg.histogram.up)
   kegg.histogram.up$order=factor(rev(as.integer(rownames(kegg.histogram.up))),labels = rev(kegg.histogram.up$Description))
@@ -47,7 +47,7 @@ goenrichment = function(cell_type){
           legend.title = element_text(face = "bold",size = 8),
           axis.text.y = element_text(size=8)) 
   kegg.plot.up
-  ggsave(paste0("./Result_for_WT/07.Enrichment.Result.KEGG/", cell_type, ".up_gene.KEGG.pdf"), plot = kegg.plot.up)
+  ggsave(paste0("./Result_for_X/07.Enrichment.Result.KEGG/", cell_type, ".up_gene.KEGG.pdf"), plot = kegg.plot.up)
 }
 
 for (cell_type in cell_types){
