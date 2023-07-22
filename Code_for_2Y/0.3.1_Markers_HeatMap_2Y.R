@@ -2,26 +2,23 @@ library(Seurat)
 library(ggplot2)
 library(dplyr)
 library(ComplexHeatmap)
-setwd('/data/yihan/Mxra7/')
+library(MAST)
 
-All.Markers = FindAllMarkers(combinedh.2y, min.pct = 0.5, logfc.threshold = 0.5)
+setwd('/data/yihan/Mxra7_2m')
+
+All.Markers = FindAllMarkers(combinedh_afterHMCluster.2y, min.pct = 0.5, logfc.threshold = 0.5)
 head(All.Markers)
-write.csv(All.Markers, file = "./03.Annotation.Result/RDS/significant.markers.csv")
-write.csv(All.Markers, file = "./03.Annotation.Result/RDS/significant.markers.txt")
+write.csv(All.Markers, file = "./Result_for_2Y/significant.markers.csv")
 
 All.Markers %>%
   group_by(cluster) %>%
-  top_n(n = 5, wt = avg_log2FC) -> top5
-DoHeatmap(combinedh.2y, features = top4$gene) + NoLegend()
-ggsave('./03.Annotation.Result/Plot/MarkersHeatmap.svg', plot = DoHeatmap(combinedh.2y, features = top10$gene) + NoLegend() , height = 20, width = 20, dpi = 500)
-ggsave('./03.Annotation.Result/Plot/MarkersHeatmap.jpg', plot = DoHeatmap(combinedh.2y, features = top10$gene) + NoLegend(), height = 20, width = 20, dpi = 500)
-ggsave('./03.Annotation.Result/Plot/MarkersHeatmap.pdf', plot = DoHeatmap(combinedh.2y, features = top10$gene) + NoLegend(), height = 20, width = 20, dpi = 500)
+  top_n(n = 7, wt = avg_log2FC) -> top7
+DoHeatmap(combinedh_afterHMCluster.2y, features = top4$gene) + NoLegend()
+ggsave('./Result_for_2Y/MarkersHeatmap.pdf', plot = DoHeatmap(combinedh_afterHMCluster.2y, features = top10$gene) + NoLegend(), height = 8, width = 8, dpi = 300)
 
-plot12=DoHeatmap(combinedh.2y, features = top4$gene, group.colors = c("#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C"),angle = 90) + NoLegend() +
-  scale_fill_gradientn(colors = c("white","#F0F0F0","#FFD92F"), guide = FALSE) + theme(axis.text.y = element_text(size = 18))
-ggsave('./03.Annotation.Result/Plot/MarkersHeatmapNew4cell.jpg', plot = plot12, height = 20, width = 20, dpi = 500)
-ggsave('./03.Annotation.Result/Plot/MarkersHeatmapNew4cell.svg', plot = plot12, height = 20, width = 20, dpi = 500)
-ggsave('./03.Annotation.Result/Plot/MarkersHeatmapNew5cell.pdf', plot = plot12, height = 15, width = 15, dpi = 500)
+plot17=DoHeatmap(combinedh_afterHMCluster.2y, features = top7$gene, group.colors = c("#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99")) + NoLegend() +
+  scale_fill_gradientn(colors = c("white","#F0F0F0","#FFD92F"), guide = FALSE) + theme(axis.text.y = element_text(size = 13))
+ggsave('./Result_for_2Y/MarkersHeatmapNew7cell.pdf', plot = plot17, height = 8, width = 8, dpi = 300)
 
-saveRDS(All.Markers,file = './03.Annotation.Result/RDS/Markers.rds')
+saveRDS(All.Markers,file = './Result_for_2Y/Markers.rds')
 
