@@ -14,6 +14,9 @@ new.cluster.ids = c("Granulocytes","Granulocytes","Granulocytes","Monocytes","Gr
                      "Monocytes","B cells","Granulocytes","Monocytes","Granulocytes")
 names(new.cluster.ids) = levels(combinedh_afterHMCluster.2y)
 combinedh_afterHMCluster.2y = RenameIdents(combinedh_afterHMCluster.2y, new.cluster.ids)
+combinedh_afterHMCluster.2y@meta.data$predicted_celltype_bcell = combinedh_afterHMCluster.2y@active.ident
+saveRDS(combinedh_afterHMCluster.2y,file = './Result_for_2Y/2Y_Annotation.rds')
+
 DimPlot(combinedh_afterHMCluster.2y, reduction = "umap") + scale_color_manual(values = brewer.pal(6, "Paired"))
 ggsave('./Result_for_2Y/2Y_Annotation.pdf', plot = DimPlot(combinedh_afterHMCluster.2y, reduction = "umap") + scale_color_manual(values = brewer.pal(6, "Paired")), height = 5, width = 5, dpi = 300)
 DimPlot(combinedh_afterHMCluster.2y, reduction = "umap", split.by = "split") + scale_color_manual(values = brewer.pal(6, "Set2")) + NoLegend()
