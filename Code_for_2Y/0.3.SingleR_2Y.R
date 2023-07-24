@@ -58,7 +58,6 @@ ggsave('./Result_for_2Y/2Y_CelltypePercentage.pdf', plot = Per2, height = 5, wid
 
 
 #my_col = brewer.pal(9, "Oranges")[3:6]
-
 Per3 = ggplot(cell_count, aes(x=CellType, y=Group, fill=Percentage)) +
   geom_tile() +
   #scale_fill_gradientn(colours = my_col) +
