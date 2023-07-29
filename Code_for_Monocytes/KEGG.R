@@ -13,8 +13,9 @@ KEGG_database = 'mmu'
 markers = read.delim("/data/yihan/Mxra7_2Y/05.edgeRMarkgenes.Result/Monocytes.control_treat.glmLRT.plot.txt", row.names = 1, sep = '\t', check.names = FALSE)
 
 gene_all = markers[which(markers$sig %in% c('down', 'up')), ]
+gene_counts = table(gene_all$sig)
+print(gene_counts)
 gene_all = rownames(gene_all)
-
 gene_all = as.character(na.omit(AnnotationDbi::select(org.Mm.eg.db,
                                                       keys = gene_all,
                                                       columns = 'ENTREZID',
@@ -22,18 +23,18 @@ gene_all = as.character(na.omit(AnnotationDbi::select(org.Mm.eg.db,
 geneset = gene_all
 
 kegg.histogram.down = as.data.frame(enrichKEGG(gene = geneset,organism= KEGG_database, qvalueCutoff = 1, pvalueCutoff= 1))
-write.csv(kegg.histogram.down, "/data/yihan/Mxra7_2m/Result_for_Bcells/2m_all_gene_KEGG.csv")
+write.csv(kegg.histogram.down, "/data/yihan/Mxra7_2Y/Result_for_Monocytes/2m_all_gene_KEGG.csv")
 
 rownames(kegg.histogram.down) = 1:nrow(kegg.histogram.down)
 kegg.histogram.down$order=factor(rev(as.integer(rownames(kegg.histogram.down))),labels = rev(kegg.histogram.down$Description))
 kegg.histogram.down$Description = gsub(' - Mus musculus \\(house mouse\\)','',kegg.histogram.down$Description)
 kegg.histogram.down$order=factor(rev(as.integer(rownames(kegg.histogram.down))),labels = rev(kegg.histogram.down$Description))
 
-selected_pathways = kegg.histogram.down[kegg.histogram.down$p.adjust < 0.08, ]
+selected_pathways = kegg.histogram.down[kegg.histogram.down$pvalue < 0.08, ]
 
 
 top_10_pathways = head(kegg.histogram.down, 10)
-top_20_pathways = head(selected_pathways, 20)
+top_20_pathways = head(kegg.histogram.down, 20)
 
 
 kegg.plot.down = ggplot(kegg.histogram.down,aes(y=reorder(order,Count),x=Count,fill=p.adjust))+
