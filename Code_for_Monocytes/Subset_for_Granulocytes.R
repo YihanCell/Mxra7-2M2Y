@@ -50,21 +50,22 @@ combined.2y.Granulocytes_PCA = RunPCA(combined.2y.Granulocytes, verbose = FALSE,
 dev.new()
 ElbowPlot(combined.2y.Granulocytes_PCA)
 dev.off()
-combined.2y.Granulocytes = RunUMAP(combined.2y.Granulocytes_PCA, dims = 1:10,verbose=FALSE)
-combined.2y.Granulocytes = FindNeighbors(combined.2y.Granulocytes, reduction = "pca", dims = 1:10) 
+combined.2y.Granulocytes = RunUMAP(combined.2y.Granulocytes_PCA, dims = 1:5,verbose=FALSE)
+combined.2y.Granulocytes = FindNeighbors(combined.2y.Granulocytes, reduction = "pca", dims = 1:5) 
 combined.2y.Granulocytes = FindClusters(combined.2y.Granulocytes)
 dev.new()
 DimPlot(combined.2y.Granulocytes, reduction = "umap",label = T)
 dev.off()
 
-combined.2y_for_SingleR_Bcell = GetAssayData(combined.2y.Granulocytes, slot="data")
-Granulocytes_2y.singleR = SingleR(test = combined.2y_for_SingleR_Bcell, ref = Imm.se, labels = Imm.se$label.fine)
+combined.2y_for_SingleR_Gcell = GetAssayData(combined.2y.Granulocytes, slot="data")
+Granulocytes_2y.singleR = SingleR(test = combined.2y_for_SingleR_Gcell, ref = Imm.se, labels = Imm.se$label.fine)
 table(Granulocytes_2y.singleR$labels, combined.2y.Granulocytes$seurat_clusters)
-new.cluster.ids_Bcell_2y = c("preB.FrD","B.FrF","B.FrE","B.FrF","preB.FrC",
-                             "B.FrF","B.FrF", "B.FrF","preB.FrC","B.FrF",
-                             "proB.FrA","proB.FrA","preB.FrD","proB.FrA","B.FrF")
-names(new.cluster.ids_Bcell_2y) = levels(combined.2y.Granulocytes)
-combined.2y.Granulocytes = RenameIdents(combined.2y.Granulocytes, new.cluster.ids_Bcell_2y)
+new.cluster.ids_Gcell_2y = c("Neutrophils","Neutrophils","Neutrophils","Neutrophils","Neutrophils",
+                             "Neutrophils","Neutrophils", "Neutrophils","Neutrophils","Neutrophils",
+                             "Neutrophils","Neutrophils","Neutrophils","Neutrophils","Neutrophils",
+                             "Basophils","Neutrophils","Neutrophils")
+names(new.cluster.ids_Gcell_2y) = levels(combined.2y.Granulocytes)
+combined.2y.Granulocytes = RenameIdents(combined.2y.Granulocytes, new.cluster.ids_Gcell_2y)
 combined.2y.Granulocytes@meta.data$predicted_celltype_bcell = combined.2y.Granulocytes@active.ident
 
 sub.2y = table(combined.2y.Granulocytes@meta.data$split, combined.2y.Granulocytes@meta.data$predicted_celltype_bcell)
