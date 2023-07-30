@@ -10,7 +10,7 @@ setwd('/data/yihan/Mxra7_2m/')
 R.utils::setOption("clusterProfiler.download.method",'auto')  
 KEGG_database = 'mmu'
 
-markers = read.delim("/data/yihan/Mxra7_2Y/05.edgeRMarkgenes.Result/Monocytes.control_treat.glmLRT.plot.txt", row.names = 1, sep = '\t', check.names = FALSE)
+markers = read.delim("/data/yihan/Mxra7_2m/05.edgeRMarkgenes.Result/Granulocytes.control_treat.glmLRT.plot.txt", row.names = 1, sep = '\t', check.names = FALSE)
 
 gene_all = markers[which(markers$sig %in% c('down', 'up')), ]
 gene_counts = table(gene_all$sig)
@@ -23,7 +23,7 @@ gene_all = as.character(na.omit(AnnotationDbi::select(org.Mm.eg.db,
 geneset = gene_all
 
 kegg.histogram.down = as.data.frame(enrichKEGG(gene = geneset,organism= KEGG_database, qvalueCutoff = 1, pvalueCutoff= 1))
-write.csv(kegg.histogram.down, "/data/yihan/Mxra7_2Y/Result_for_Monocytes/2m_all_gene_KEGG.csv")
+write.csv(kegg.histogram.down, "/data/yihan/Mxra7_2m/Result_for_Granulocytes/2m_all_gene_KEGG.csv")
 
 rownames(kegg.histogram.down) = 1:nrow(kegg.histogram.down)
 kegg.histogram.down$order=factor(rev(as.integer(rownames(kegg.histogram.down))),labels = rev(kegg.histogram.down$Description))
@@ -52,7 +52,7 @@ dev.new()
 ggplot(top_20_pathways, aes(y = reorder(order, Count), x = Count, fill = p.adjust)) +
   geom_bar(stat = "identity", width = 0.7) +
   scale_fill_gradient(low = "steelblue", high = "orange") +  # Using a different color palette
-  labs(title = "Enriched KEGG Pathways in B Cells",
+  labs(title = "Enriched KEGG Pathways in Granulocytes",
        subtitle = "Top pathways based on gene count and adjusted p-value",
        x = "Gene Count",
        y = "Pathways") +  # Add a caption with data source information
@@ -68,6 +68,4 @@ ggplot(top_20_pathways, aes(y = reorder(order, Count), x = Count, fill = p.adjus
   )
 dev.off()
 
-ggsave("/data/yihan/Mxra7_2m/Result_for_Bcells/2m_all_gene.KEGG_full.pdf", plot = kegg.plot.down)
-
-
+## volcano plot
