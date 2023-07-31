@@ -31,13 +31,14 @@ kegg.histogram.down$Description = gsub(' - Mus musculus \\(house mouse\\)','',ke
 kegg.histogram.down$order=factor(rev(as.integer(rownames(kegg.histogram.down))),labels = rev(kegg.histogram.down$Description))
 
 selected_pathways = kegg.histogram.down[kegg.histogram.down$pvalue < 0.08, ]
+selected_pathways = selected_pathways[selected_pathways$ID != "mmu05171", ]
 
 
 top_10_pathways = head(kegg.histogram.down, 10)
-top_20_pathways = head(kegg.histogram.down, 20)
+top_20_pathways = head(selected_pathways, 20)
 
 
-kegg.plot.down = ggplot(kegg.histogram.down,aes(y=reorder(order,Count),x=Count,fill=p.adjust))+
+kegg.plot.down = ggplot(top_20_pathways,aes(y=reorder(order,Count),x=Count,fill=p.adjust))+
   geom_bar(stat = "identity",width=0.7)+
   scale_fill_gradient(low = "red",high ="blue" )+
   labs(title = "B cells KEGG Pathways Enrichment",
@@ -51,7 +52,7 @@ kegg.plot.down = ggplot(kegg.histogram.down,aes(y=reorder(order,Count),x=Count,f
 dev.new()
 ggplot(top_20_pathways, aes(y = reorder(order, Count), x = Count, fill = p.adjust)) +
   geom_bar(stat = "identity", width = 0.7) +
-  scale_fill_gradient(low = "steelblue", high = "orange") +  # Using a different color palette
+  scale_fill_gradient(limits = c(0,0.1),low = "steelblue", high = "orange") +  # Using a different color palette
   labs(title = "Enriched KEGG Pathways in Granulocytes",
        subtitle = "Top pathways based on gene count and adjusted p-value",
        x = "Gene Count",
@@ -67,5 +68,3 @@ ggplot(top_20_pathways, aes(y = reorder(order, Count), x = Count, fill = p.adjus
     legend.text = element_text(size = 8)
   )
 dev.off()
-
-## volcano plot
