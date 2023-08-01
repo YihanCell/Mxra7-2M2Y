@@ -40,7 +40,7 @@ dev.off()
 
 #===========
 dev.new() 
-gg1 <- rankNet(cellchat.2m, mode = "comparison", stacked = T, do.stat = TRUE)
-gg2 <- rankNet(cellchat.2m, mode = "comparison", stacked = F, do.stat = TRUE)
+gg1 <- rankNet(cellchat.2y, mode = "comparison", stacked = T, do.stat = TRUE)
+gg2 <- rankNet(cellchat.2y, mode = "comparison", stacked = F, do.stat = TRUE)
 gg1 + gg2
 dev.off()
