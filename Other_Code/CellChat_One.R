@@ -85,3 +85,9 @@ cellchat.ko2m = computeCommunProbPathway(cellchat.ko2m)
 cellchat.ko2m = aggregateNet(cellchat.ko2m)
 groupSize.ko2m = as.numeric(table(cellchat.ko2m@idents))
 cellchat.ko2m = netAnalysis_computeCentrality(cellchat.ko2m, slot.name = "netP")
+
+
+saveRDS(object = cellchat.ko2m,file = "./Result_for_CellChat/ko2m.rds")
+saveRDS(object = cellchat.wt2y,file = "./Result_for_CellChat/wt2y.rds")
+saveRDS(object = cellchat.wt2m,file = "./Result_for_CellChat/wt2m.rds")
+saveRDS(object = cellchat.ko2y,file = "./Result_for_CellChat/ko2y.rds")
